@@ -1,8 +1,15 @@
+import { useState } from 'react';
 import './App.css'
 import { useCategoryData } from './hooks/useCategoryData';
+import { CreateModal } from './components/create-modal/create-modal';
 
 function App() {
   const { data } = useCategoryData();
+  const [ isModalOpen, setIsModalOpen ] = useState(false);
+
+  const handleOpenModal = () => {
+    setIsModalOpen(prev => !prev)
+  }
 
   return (
     <div className="container">
@@ -20,7 +27,9 @@ function App() {
           </td>
       </tr>
       </tbody>
-    </table>      
+    </table>
+    {isModalOpen && <CreateModal closeModal={handleOpenModal}/>}      
+    <button onClick={handleOpenModal}>novo</button>
     </div>
   )
 }
